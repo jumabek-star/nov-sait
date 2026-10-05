@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ky">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>УММУ МУХАММАД Медресеси</title>
+<style>
+/* ===== ЧӨЙРӨ (CSS variables) ===== */
+:root{
+  --green:#0f5a40; --green-dark:#083a29; --green-soft:#e7f1ec;
+  --gold:#c9a24a; --gold-light:#f0dfa8; --white:#fff; --ink:#1d2b25; --muted:#5d6e66;
+  --radius:18px; --shadow:0 8px 24px rgba(8,58,41,.12);
+  --font:"Segoe UI",Tahoma,Arial,sans-serif; --serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--font);color:var(--ink);background:#fbfaf6;line-height:1.65}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.container{width:min(1140px,92%);margin:auto}
+section{padding:80px 0}
+h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.5rem);color:var(--green-dark);text-align:center;margin-bottom:12px}
+.lead{text-align:center;color:var(--muted);max-width:640px;margin:0 auto 40px}
+h2::after{content:"";display:block;width:90px;height:4px;margin:12px auto 0;border-radius:4px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* Исламий геометриялык оромо (SVG фон) */
+.pattern{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M40 4l9 22 22-9-9 22 22 9-22 9 9 22-22-9-9 22-9-22-22 9 9-22-22-9 22-9-9-22 22 9z' fill='none' stroke='%23c9a24a' stroke-opacity='.25' stroke-width='1.2'/%3E%3C/svg%3E")}
+
+/* ===== КАРТОЧКАЛАР ===== */
+.grid{display:grid;gap:22px}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--white);border:1px solid #eadfc2;border-top:4px solid var(--gold);border-radius:var(--radius);
+  padding:26px;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-8px);box-shadow:0 16px 32px rgba(8,58,41,.2)}
+.card h3{color:var(--green);margin-bottom:8px;font-size:1.25rem}
+.icon{font-size:2rem;display:block;margin-bottom:10px}
+
+/* ===== КНОПКАЛАР ===== */
+.btn{display:inline-block;padding:14px 30px;border-radius:50px;font-weight:700;border:2px solid var(--gold);
+  cursor:pointer;font-size:1rem;font-family:inherit;transition:transform .25s,box-shadow .25s,background .25s,color .25s}
+.btn-gold{background:var(--gold);color:var(--green-dark)}
+.btn-gold:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 8px 18px rgba(201,162,74,.5)}
+.btn-outline{color:var(--white);background:transparent}
+.btn-outline:hover{background:var(--white);color:var(--green-dark);transform:translateY(-3px)}
+.btn:active{transform:scale(.96)}
+
+/* ===== HEADER ===== */
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--green-dark);border-bottom:3px solid var(--gold);box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.nav{display:flex;justify-content:space-between;align-items:center;min-height:68px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--white)}
+.logo{width:46px;height:46px;border:2px dashed var(--gold);border-radius:50%;display:grid;place-items:center;
+  color:var(--gold);font-size:.6rem;text-align:center;line-height:1.1}
+.brand strong{display:block;font-family:var(--serif);letter-spacing:1px;line-height:1.1}
+.brand small{color:var(--gold-light)}
+nav ul{display:flex;gap:6px}
+nav a{display:block;color:var(--white);padding:8px 12px;border-radius:8px;font-size:.92rem;transition:background .25s,color .25s}
+nav a:hover{background:var(--gold);color:var(--green-dark)}
+.burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
+.burger span{display:block;width:26px;height:3px;background:var(--gold);margin:5px 0;border-radius:3px;transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* ===== HERO ===== */
+#home{min-height:100vh;display:flex;align-items:center;text-align:center;color:var(--white);padding-top:110px;
+  background:linear-gradient(rgba(8,58,41,.88),rgba(15,90,64,.82)),
+  /* ЖЕРГЕ СҮРӨТ: url('images/hero.jpg') коюңуз */ var(--green-dark)}
+.hero h1{font-family:var(--serif);font-size:clamp(2.4rem,8vw,5rem);letter-spacing:3px;color:var(--gold-light);
+  animation:rise 1.1s ease both}
+.hero h1 span{display:block;font-size:.4em;letter-spacing:6px;color:var(--white)}
+.hero .slogan{font-size:clamp(1.1rem,3vw,1.6rem);margin:20px 0 8px;color:var(--gold)}
+.hero p{max-width:560px;margin:0 auto 32px;opacity:.92}
+.hero .btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+
+/* ===== МЕДРЕСЕ ЖӨНҮНДӨ ===== */
+.stat{text-align:center}
+.stat .big{font-family:var(--serif);font-size:2.6rem;color:var(--gold);font-weight:700}
+
+/* ===== ПРОГРАММА ===== */
+#program{background:var(--green-soft)}
+
+/* ===== КЕСИПТИК ===== */
+#skills{background:var(--green-dark);color:var(--white)}
+#skills h2{color:var(--gold-light)}
+#skills .card{background:rgba(255,255,255,.07);border-color:var(--gold);color:var(--white);text-align:center}
+#skills .card h3{color:var(--gold-light);font-size:1.5rem}
+#skills .tag{display:inline-block;background:var(--gold);color:var(--green-dark);font-weight:800;padding:4px 16px;border-radius:30px;margin-bottom:12px}
+.note{text-align:center;margin-top:30px;color:var(--gold-light);font-weight:600}
+
+/* ===== АКЫ ===== */
+#fee{text-align:center}
+.fee-box{background:linear-gradient(135deg,var(--gold),#e6c871);border-radius:28px;padding:50px 24px;
+  box-shadow:0 14px 40px rgba(201,162,74,.5);color:var(--green-dark);border:4px double var(--green-dark)}
+.fee-box h2{color:var(--green-dark)} .fee-box h2::after{display:none}
+.fee-box .huge{font-family:var(--serif);font-size:clamp(2.6rem,9vw,5rem);font-weight:700;animation:pulse 2.4s infinite}
+@keyframes pulse{50%{transform:scale(1.05)}}
+
+/* ===== АРТЫКЧЫЛЫКТАР ===== */
+.why{display:flex;align-items:center;gap:12px;padding:18px 22px;border-radius:14px;background:var(--white);
+  border:1px solid #eadfc2;font-weight:600;box-shadow:var(--shadow);transition:transform .3s}
+.why:hover{transform:translateY(-6px)}
+.why::before{content:"✓";display:grid;place-items:center;flex:0 0 32px;height:32px;border-radius:50%;background:var(--green);color:var(--gold-light)}
+
+/* ===== ДОКУМЕНТТЕР ===== */
+#docs{background:var(--green-soft)}
+.docs{max-width:760px;margin:auto;display:grid;gap:14px;counter-reset:d}
+.docs li{counter-increment:d;display:flex;align-items:center;gap:16px;background:var(--white);padding:16px 20px;
+  border-radius:14px;border-left:5px solid var(--gold);box-shadow:var(--shadow);transition:transform .3s}
+.docs li:hover{transform:translateX(8px)}
+.docs li::before{content:counter(d);flex:0 0 34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--green);color:#fff;font-weight:700}
+.docs .ic{font-size:1.6rem}
+
+/* ===== ФОРМА ===== */
+.form{background:var(--white);padding:34px;border-radius:var(--radius);box-shadow:var(--shadow);border-top:4px solid var(--gold);max-width:860px;margin:auto}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-weight:600;color:var(--green-dark);font-size:.92rem}
+input,select,textarea{font:inherit;padding:12px 14px;border:2px solid #d9e3de;border-radius:12px;background:#fcfdfc;transition:border .25s,box-shadow .25s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,162,74,.25)}
+input[type=file]{padding:9px;background:var(--green-soft)}
+.form h3{margin:26px 0 12px;color:var(--green)}
+.form .btn{margin-top:26px;width:100%}
+.success{display:none;margin-top:20px;padding:18px;border-radius:12px;background:var(--green);color:var(--gold-light);text-align:center;font-weight:600}
+.success.show{display:block;animation:rise .6s ease}
+
+/* ===== БАЙЛАНЫШ ===== */
+.phones a{display:block;font-weight:700;color:var(--green);margin:4px 0}
+.phones a:hover{color:var(--gold)}
+.map{margin-top:30px;min-height:280px;border-radius:var(--radius);border:3px dashed var(--gold);display:grid;place-items:center;
+  text-align:center;color:var(--muted);background:var(--green-soft);padding:20px}
+
+/* ===== FOOTER ===== */
+footer{background:var(--green-dark);color:var(--white);text-align:center;padding:44px 0 24px;border-top:4px solid var(--gold)}
+footer h3{font-family:var(--serif);color:var(--gold-light)}
+footer .motto{color:var(--gold);margin:6px 0 18px}
+footer ul{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-bottom:20px}
+footer ul a:hover{color:var(--gold)}
+footer small{opacity:.75}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .burger{display:block}
+  nav{position:absolute;top:100%;left:0;right:0;background:var(--green-dark);max-height:0;overflow:hidden;transition:max-height .4s}
+  nav.open{max-height:480px;border-bottom:3px solid var(--gold)}
+  nav ul{flex-direction:column;padding:12px 4%}
+  section{padding:56px 0}
+}
+@media(max-width:480px){.form{padding:20px}.brand small{font-size:.75rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER / NAVBAR ===== -->
+<header>
+  <div class="container nav">
+    <a href="#home" class="brand" aria-label="Башкы бет">
+      <!-- ЛОГОТИП ҮЧҮН ОРУН: <img src="logo.png" alt="Логотип"> менен алмаштырыңыз -->
+      <span class="logo">ЛОГО</span>
+      <span><strong>УММУ МУХАММАД</strong><small>Медресеси</small></span>
+    </a>
+    <button class="burger" id="burger" aria-label="Менюну ачуу" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav id="menu" aria-label="Негизги меню">
+      <ul>
+        <li><a href="#home">Башкы бет</a></li>
+        <li><a href="#about">Медресе жөнүндө</a></li>
+        <li><a href="#program">Окуу программасы</a></li>
+        <li><a href="#why">Артыкчылыктар</a></li>
+        <li><a href="#docs">Талап кылынган документтер</a></li>
+        <li><a href="#apply">Онлайн кабыл алуу</a></li>
+        <li><a href="#contact">Байланыш</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ===== HERO ===== -->
+<section id="home" class="pattern hero">
+  <div class="container">
+    <h1>УММУ МУХАММАД<span>Медресеси</span></h1>
+    <p class="slogan">Куран, илим жана кесип менен келечекке кадам</p>
+    <p>4 жылдык акысыз диний жана кесиптик билим берүү программасы.</p>
+    <div class="btns">
+      <a href="#apply" class="btn btn-gold">Окууга тапшыруу</a>
+      <a href="#about" class="btn btn-outline">Медресе жөнүндө</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== МЕДРЕСЕ ЖӨНҮНДӨ ===== -->
+<section id="about">
+  <div class="container">
+    <h2>Медресе жөнүндө</h2>
+    <p class="lead">Билим, тарбия жана кесип — бир жерде.</p>
+    <div class="grid grid-3">
+      <article class="card stat"><div class="big">4 жыл</div><p>Окуу мөөнөтү — 4 жыл.</p></article>
+      <article class="card stat"><span class="icon">📖</span><p>Студенттер 4 жыл ичинде Куранды толук жаттап бүтүрүшөт.</p></article>
+      <article class="card stat"><span class="icon">🕌</span><p>Рамазан айында студенттер практика катары мечиттерде Куран хатмыларга чыгышат.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ОКУУ ПРОГРАММАСЫ ===== -->
+<section id="program">
+  <div class="container">
+    <h2>Окуу программасы</h2>
+    <div class="grid grid-3" style="margin-top:34px">
+      <article class="card"><span class="icon">📖</span><h3>Куран</h3><ul><li>• Куран жаттоо</li><li>• Тажвид жана туура окуу</li></ul></article>
+      <article class="card"><span class="icon">📜</span><h3>Хадис</h3><ul><li>• Хадис илими</li></ul></article>
+      <article class="card"><span class="icon">⚖️</span><h3>Фикх</h3><ul><li>• Ислам укугу жана ибадаттар</li></ul></article>
+      <article class="card"><span class="icon">✍️</span><h3>Араб тили</h3><ul><li>• Араб тилинин негиздери</li></ul></article>
+      <article class="card"><span class="icon">☪️</span><h3>Акыйда</h3><ul><li>• Ислам ишеним негиздери</li></ul></article>
+      <article class="card"><span class="icon">🌙</span><h3>Сиро</h3><ul><li>• Пайгамбарыбыздын ﷺ өмүр жолу</li></ul></article>
+      <article class="card"><span class="icon">🤝</span><h3>Адеп</h3><ul><li>• Исламдагы адеп-ахлак</li></ul></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== КЕСИПТИК БИЛИМ ===== -->
+<section id="skills" class="pattern">
+  <div class="container">
+    <h2>Диний билим менен бирге кесип үйрөн!</h2>
+    <div class="grid grid-2" style="margin-top:34px">
+      <article class="card"><span class="tag">AUTO ELECTRIC</span><h3>Авто электрик сабактары</h3><span class="icon">🔧</span></article>
+      <article class="card"><span class="tag">IT</span><h3>IT сабактары</h3><span class="icon">💻</span></article>
+    </div>
+    <p class="note">Бул багыттарды ийгиликтүү аяктаган студенттерге сертификат берилет.</p>
+  </div>
+</section>
+
+<!-- ===== ДЕНЕ ТАРБИЯСЫ ===== -->
+<section id="sport">
+  <div class="container">
+    <h2>Ден соолукка кам көрүү</h2>
+    <article class="card" style="max-width:760px;margin:34px auto 0;text-align:center">
+      <span class="icon">🏃</span>
+      <p>Студенттердин ден соолугун чыңдоо жана активдүү жашоо образын калыптандыруу максатында дене-тарбия сабактары өткөрүлөт.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ===== ОКУУ АКЫСЫ ===== -->
+<section id="fee" class="pattern">
+  <div class="container">
+    <div class="fee-box">
+      <h2>ОКУУ АКЫСЫЗ!</h2>
+      <div class="huge">Окуу акысыз</div>
+      <p style="font-size:1.2rem;font-weight:700;margin-top:14px">Айына 5 000 сом — тамак-аш жана жатакана үчүн.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ЭМНЕ ҮЧҮН БИЗДИ ТАНДОО КЕРЕК ===== -->
+<section id="why">
+  <div class="container">
+    <h2>Эмне үчүн бизди тандоо керек?</h2>
+    <div class="grid grid-3" style="margin-top:34px">
+      <div class="why">4 жылдык билим берүү</div>
+      <div class="why">Куранды толук жаттоо</div>
+      <div class="why">Диний билим</div>
+      <div class="why">Кесиптик билим</div>
+      <div class="why">IT сабактары</div>
+      <div class="why">Авто электрик сабактары</div>
+      <div class="why">Сертификат алуу мүмкүнчүлүгү</div>
+      <div class="why">Жатакана</div>
+      <div class="why">Тамак-аш</div>
+      <div class="why">Дене тарбия</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ДОКУМЕНТТЕР ===== -->
+<section id="docs">
+  <div class="container">
+    <h2>Керектүү документтер</h2>
+    <p class="lead">Окууга кабыл алуу үчүн төмөнкү документтер талап кылынат.</p>
+    <ol class="docs" style="list-style:none">
+      <li><span class="ic">📝</span>Арыз</li>
+      <li><span class="ic">🖼️</span>Сүрөт 3x4</li>
+      <li><span class="ic">👶</span>Туулгандыгы тууралуу күбөлүктүн көчүрмөсү</li>
+      <li><span class="ic">🪪</span>Ата-энесинин паспортунун көчүрмөсү</li>
+      <li><span class="ic">🏠</span>Жашаган жери жана үй-бүлөсү тууралуу справка (Түндүк тиркемесинен алынат)</li>
+      <li><span class="ic">🩺</span>ОМС</li>
+      <li><span class="ic">🎓</span>9-класс же 11-класс бүткөндүгүн тастыктаган аттестаттын көчүрмөсү</li>
+      <li><span class="ic">📋</span>Медициналык справка 086</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== ОНЛАЙН КАБЫЛ АЛУУ ===== -->
+<section id="apply">
+  <div class="container">
+    <h2>Онлайн окууга тапшыруу</h2>
+    <p class="lead">Форманы толтуруп, документтерди тиркеңиз.</p>
+    <form class="form" id="applyForm">
+      <div class="fields">
+        <div class="field"><label for="fio">Аты-жөнү</label><input id="fio" name="fio" required></div>
+        <div class="field"><label for="bd">Туулган күнү</label><input id="bd" name="bd" type="date" required></div>
+        <div class="field"><label for="tel">Телефон номери</label><input id="tel" name="tel" type="tel" placeholder="+996 ..." required></div>
+        <div class="field"><label for="addr">Жашаган дареги</label><input id="addr" name="addr" required></div>
+        <div class="field"><label for="cls">Бүткөн классы</label>
+          <select id="cls" name="cls" required><option value="">Тандаңыз</option><option>9-класс</option><option>11-класс</option></select></div>
+        <div class="field"><label for="par">Ата-энесинин аты-жөнү</label><input id="par" name="par" required></div>
+        <div class="field"><label for="ptel">Ата-энесинин телефон номери</label><input id="ptel" name="ptel" type="tel" required></div>
+        <div class="field"><label for="mail">Электрондук почта</label><input id="mail" name="mail" type="email"></div>
+        <div class="field full"><label for="extra">Кошумча маалымат</label><textarea id="extra" name="extra" rows="3"></textarea></div>
+      </div>
+      <h3>Документтерди жүктөө</h3>
+      <div class="fields">
+        <div class="field"><label for="f1">Арыз</label><input id="f1" type="file"></div>
+        <div class="field"><label for="f2">3x4 сүрөт</label><input id="f2" type="file" accept="image/*"></div>
+        <div class="field"><label for="f3">Туулгандыгы тууралуу күбөлүк</label><input id="f3" type="file"></div>
+        <div class="field"><label for="f4">Аттестат</label><input id="f4" type="file"></div>
+        <div class="field"><label for="f5">Медициналык справка</label><input id="f5" type="file"></div>
+      </div>
+      <button type="submit" class="btn btn-gold">Арызды жөнөтүү</button>
+      <div class="success" id="ok" role="status">Арызыңыз ийгиликтүү кабыл алынды. Жакын арада сиз менен байланышабыз.</div>
+    </form>
+  </div>
+</section>
+
+<!-- ===== БАЙЛАНЫШ ===== -->
+<section id="contact" style="background:var(--green-soft)">
+  <div class="container">
+    <h2>Биз менен байланышыңыз</h2>
+    <div class="grid grid-2" style="margin-top:34px">
+      <article class="card"><span class="icon">📍</span><h3>Дарек</h3><p>Ош шаары, Туран кичи району,<br>Ишматов көчөсү, 65Б</p></article>
+      <article class="card phones"><span class="icon">📞</span><h3>Телефон</h3>
+        <a href="tel:+996504639494">+996 504 639 494</a>
+        <a href="tel:+996507269950">+996 507 269 950</a>
+        <a href="tel:+996709864195">+996 709 864 195</a></article>
+    </div>
+    <!-- GOOGLE MAPS: төмөнкү блокту Google Maps "Embed a map" iframe коду менен алмаштырыңыз -->
+    <div class="map" role="img" aria-label="Google Maps картасы үчүн орун">🗺️ Google Maps картасы ушул жерге коюлат</div>
+  </div>
+</section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <h3>УММУ МУХАММАД МЕДРЕСЕСИ</h3>
+    <p class="motto">Куран • Илим • Адеп • Кесип</p>
+    <ul>
+      <li><a href="#home">Башкы бет</a></li>
+      <li><a href="#program">Окуу программасы</a></li>
+      <li><a href="#apply">Онлайн кабыл алуу</a></li>
+      <li><a href="#contact">Байланыш</a></li>
+    </ul>
+    <small>© 2026 Умму Мухаммад медресеси. Бардык укуктар корголгон.</small>
+  </div>
+</footer>
+
+<script>
+// ===== Hamburger меню =====
+const burger = document.getElementById('burger');
+const menu = document.getElementById('menu');
+burger.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open);
+});
+// Шилтемеге басканда меню жабылат
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  menu.classList.remove('open'); burger.classList.remove('open');
+  burger.setAttribute('aria-expanded', false);
+}));
+
+// ===== Онлайн кабыл алуу формасы =====
+// ЭСКЕРТҮҮ: Бул — frontend demo. Маалыматтар чыныгы серверге ЖӨНӨТҮЛБӨЙТ,
+// файлдар да эч жакка жүктөлбөйт. Чыныгы иштеши үчүн backend керек (fetch/POST).
+document.getElementById('applyForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const ok = document.getElementById('ok');
+  ok.classList.add('show');
+  e.target.reset();
+  ok.scrollIntoView({behavior:'smooth', block:'center'});
+});
+</script>
+</body>
+</html>
